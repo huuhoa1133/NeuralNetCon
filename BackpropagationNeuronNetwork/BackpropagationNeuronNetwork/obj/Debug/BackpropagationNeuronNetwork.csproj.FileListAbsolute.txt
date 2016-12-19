@@ -1,0 +1,6 @@
+D:\Source\C++\BackpropagationNeuronNetwork\BackpropagationNeuronNetwork\bin\Debug\BackpropagationNeuronNetwork.exe.config
+D:\Source\C++\BackpropagationNeuronNetwork\BackpropagationNeuronNetwork\bin\Debug\BackpropagationNeuronNetwork.exe
+D:\Source\C++\BackpropagationNeuronNetwork\BackpropagationNeuronNetwork\bin\Debug\BackpropagationNeuronNetwork.pdb
+D:\Source\C++\BackpropagationNeuronNetwork\BackpropagationNeuronNetwork\obj\Debug\BackpropagationNeuronNetwork.csprojResolveAssemblyReference.cache
+D:\Source\C++\BackpropagationNeuronNetwork\BackpropagationNeuronNetwork\obj\Debug\BackpropagationNeuronNetwork.exe
+D:\Source\C++\BackpropagationNeuronNetwork\BackpropagationNeuronNetwork\obj\Debug\BackpropagationNeuronNetwork.pdb
