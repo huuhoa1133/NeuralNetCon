@@ -17,22 +17,25 @@ namespace BackpropagationNeuronNetwork
 
                 ReadMNIST read = new ReadMNIST("D:\\Source\\C++\\BackpropagationNeuronNetwork\\BackpropagationNeuronNetwork\\bin\\Debug");
                 DataSet ds = read.LoadDataMNIST();
-                //Backpropagation bnn = new Backpropagation (784, 200, 10);
+                ReadDatabasePlus readplus = new ReadDatabasePlus();
+                DataSet ds1 = readplus.Load("data.xml");
+                ds.CoppyDataset(ds1);
+                //Backpropagation bnn = new Backpropagation (784, 200, 14);
 
                 //printds(ds);
-                
-                Backpropagation bnn = new Backpropagation("RecogCharacter.xml");
+
+                Backpropagation bnn = new Backpropagation("RecogCharacterPlus.xml");
 
                 //test(bnn,ds);
-                testTextFile(bnn);
+                //testTextFile(bnn);
 
-                double learnRate = 0.05;  // learning rate - controls the maginitude of the increase in the change in weights.
-                double momentum = 0.05; // momentum - to discourage oscillation.
+                double learnRate = 0.1;  // learning rate - controls the maginitude of the increase in the change in weights.
+                double momentum = 0.1; // momentum - to discourage oscillation.
                 Console.WriteLine("Setting learning rate = " + learnRate.ToString("F2") + " and momentum = " + momentum.ToString("F2"));
 
                 int maxEpochs = 500;
-                double errorThresh = 1.0;
-                Console.WriteLine("\nSetting max epochs = " + maxEpochs + " and error threshold = " + errorThresh.ToString("F6"));
+                
+               
 
                 int epoch = 0;
                 double error = double.MaxValue;
@@ -42,7 +45,7 @@ namespace BackpropagationNeuronNetwork
                 while (epoch < maxEpochs) // train
                 {
                     error = 0.0;
-                    for (int i = 0; i < 50000; i++)
+                    for (int i = 0; i < ds.DataTrain.Count; i++)
                     {
                         yValues = bnn.ComputeOutputs(ds.DataTrain[i].input);
                         error += Backpropagation.Error(ds.DataTrain[i].output, yValues);
@@ -51,14 +54,9 @@ namespace BackpropagationNeuronNetwork
                         
                     }
                     
-                    bnn.Save("RecogCharacter.xml");
+                    bnn.Save("RecogCharacterPlus.xml");
                     
                     Console.WriteLine("epoch = "+ epoch + " error = " + error);
-                    //if (error < errorThresh)
-                    //{
-                    //    Console.WriteLine("Found weights and bias values that meet the error criterion at epoch " + epoch);
-                    //    break;
-                    //}
                     
                     ++epoch;
                 } // train loop

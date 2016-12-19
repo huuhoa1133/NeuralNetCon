@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace BackpropagationNeuronNetwork
 {
@@ -94,11 +95,13 @@ namespace BackpropagationNeuronNetwork
                 int magic2 = brLabels.ReadInt32();
                 int numLabels = brLabels.ReadInt32();
 
-                DataPoint temp;
+                DataPoint temp = new DataPoint();
+                
                 for (int di = 0; di < datasize; di++)
                 {
                     //read image
                     temp = new DataPoint();
+                    
                     for (int i = 0; i < 28; i++)
                     {
                         for (int j = 0; j < 28; j++)
@@ -116,7 +119,7 @@ namespace BackpropagationNeuronNetwork
                     }
                     //read label
                     string label = brLabels.ReadByte().ToString();
-                    int ioutput;//lebel output
+                    int ioutput;//label output
                     Int32.TryParse(label, out ioutput);
                     temp.output[ioutput] = 1;
 
@@ -153,5 +156,29 @@ namespace BackpropagationNeuronNetwork
             }
         }
 
+    }
+    public class ReadDatabasePlus
+    {
+        XmlDocument doc;
+        public DataSet Load(string path)
+        {
+            DataSet ds = new DataSet();
+            doc = new XmlDocument();
+            doc.Load(path);
+            ds.Load((XmlElement)doc.DocumentElement.ChildNodes[0]);
+           
+
+            return ds;
+        }
+        private string xPathValue(string xPath)
+        {
+
+            XmlNode node = doc.SelectSingleNode(xPath);
+            if (node == null)
+            {
+                throw new ArgumentException("Cannot find spacified node", xPath);
+            }
+            return node.InnerText;
+        }
     }
 }
